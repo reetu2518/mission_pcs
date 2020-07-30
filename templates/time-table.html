@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Mission PCS</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Mission PCS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+                {% if staff.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="javascript:void(0)">Hello, {{staff.name}}</a></li>
+                <li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="register">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="login">Login</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+        <!-- <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+    </nav>
+
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Welcome to<strong> Mission PCS!</strong>
+        <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button> -->
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <H1>
+                    <FONT COLOR="DARKCYAN">
+                        <CENTER>Create Time Table</FONT>
+                    <a href="routineView">View time table</a>
+                </H1>
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% for msg in messages %}
+                        <div class="alert alert-info" role="alert">
+                            <h4 class="alert-heading"></h4>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <p>{{msg}}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- create time table -->
+                <form action="timetable" name="add" id="add" class=" form-label-left" method="post" accept-charset="utf-8" novalidate="novalidate">
+                    {% csrf_token %}
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="subject_id">Subject <span class="required">*</span>
+                        </label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input class="form-control col-md-7 col-xs-12" name="subject" value="" placeholder="Subject" required="required" type="tex">
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="day">Day <span class="required">*</span>
+                        </label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <select class="form-control col-md-7 col-xs-12" name="day" id="day" required="required">
+                                <option value="">--Select--</option>
+                                <option value="saturday">Saturday</option>
+                                <option value="sunday">Sunday</option>
+                                <option value="monday">Monday</option>
+                                <option value="tuesday">Tuesday</option>
+                                <option value="wednesday">Wednesday</option>
+                                <option value="thursday">Thursday</option>
+                                <option value="friday">Friday</option>
+                            </select>
+                            <div class="help-block"></div>
+                        </div>
+                    </div>
+                    <!-- <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="teacher_id">Teacher <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="form-control col-md-7 col-xs-12" name="teacher_id" id="teacher_id" required="required">
+                                <option value="">--Select--</option>
+                                <option value="1">SW Ambris</option>
+                                <option value="20">teacher11</option>
+                            </select>
+                            <div class="help-block"></div>
+                        </div>
+                    </div> -->
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Start Time <span class="required">*</span>
+                        </label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <select class="form-control col-md-7 col-xs-12" name="start_time" required="required">
+                                <option value="">--Select--</option>
+                                {% for i in times  %}
+                                <option value="{{i.title}}">{{i.title}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">End Time <span class="required">*</span>
+                        </label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <select class="form-control col-md-7 col-xs-12" name="end_time" required="required">
+                                <option value="">--Select--</option>
+                                {% for i in times  %}
+                                <option value="{{i.title}}">{{i.title}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div> -->
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <button id="send" type="submit" class="btn btn-success">Submit</button>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

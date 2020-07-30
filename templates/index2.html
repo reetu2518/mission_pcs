@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <!-- <p>Dynamic Name : {{name}}</p>
+    <p>Dynamic Place : {{place}}</p> -->
+    <h1>Welcome to text analyzer</h1> 
+    <form action="removefun" method="POST">
+        {% csrf_token %}
+        <textarea name="desc" style="margin: 0px; width: 1322px; height: 261px;"></textarea><br>
+        <input type="checkbox" name="remove"> Remove Punchucation<br>
+        <input type="checkbox" name="sapce"> Space Remover<br>
+        <input type="checkbox" name="newline"> New line remove<br>
+        <input type="checkbox" name="uppercase"> Uppercase<br>
+        <input type="checkbox" name="charcount"> Char Count<br>
+        <input type="checkbox" name="capfirst"> Capitalize<br><br>
+        <input type="submit" value="Submit">
+    </form>
+    
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+</head>
+<body>
+    <h1>Result</h1> 
+    {{text}}: {{char}}
+    <br> 
+    <h3><a href='/'>Home</a> </h3>
+</body>
+</html> -->

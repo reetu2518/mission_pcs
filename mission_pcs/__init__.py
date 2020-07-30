@@ -1,0 +1,1 @@
+default_app_config = 'my_new_app.apps.MyNewAppConfig'
